@@ -1,4 +1,4 @@
-// IMPORTOIDAAN JÄRJESTELMÄ OLIO
+//IMPORTOIDAAN JÄRJESTELMÄ OLIO
 import React, { useState } from "react";
 import '../App.css';
 
@@ -18,6 +18,10 @@ export default function Todolist() {
     setTodo("");
     setDate("");
   };
+  const deleteTodo = (index) => {
+    setTodos(todos.filter((todo, i) => i !== index));
+  };
+
   return (
     <div>
         <h2>Add todo:</h2>
@@ -43,15 +47,21 @@ export default function Todolist() {
             <thead>
                 <th>Date</th>
                 <th>Description</th>
+                <th> </th>
+
             </thead>
+         
             <tbody>
-                {todos.map((todo, index) => (
-                    <tr key={index}>
-                        <td>{todo.date}</td>
-                        <td>{todo.description}</td>
-                    </tr>
-                ))}
-            </tbody>
+          {todos.map((todo, index) => (
+            <tr key={index}>
+              <td>{todo.date}</td>
+              <td>{todo.description}</td>
+              <td>
+                <button onClick={() => deleteTodo(index)}>Delete</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
         </table>
     </div>
 

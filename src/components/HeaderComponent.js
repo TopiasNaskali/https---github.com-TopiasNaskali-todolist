@@ -1,12 +1,12 @@
 import './App.css';
 import HeaderComponent from './components/HeaderComponent';
-import Todolist from './components/Todolist';
+import Todotable from './components/Todolist';
 
 function App(){
     return (
     <div>
         <HeaderComponent/>
-        <Todolist/>
+        <Todotable/>
     </div>
     );
 }
