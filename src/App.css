@@ -6,40 +6,43 @@ table {
   width: 100%;
 }
 
-th, td {
-  border: 1px solid #ddd;
-  padding: 8px;
-}
 
-th {
-  background-color: #f2f2f2;
-  text-align: left;
-  font-weight: bold;
-}
-.otsikko1,
-.otsikko {
+
+.container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 16px;
+  height: 100vh;
 }
 
-.otsikko1 input,
-.otsikko input {
-  margin: 0 16px;
+h1, input {
+  margin: 10px;
 }
 
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+button {
+  height: 32px;
+  font-size: 14px;
+  border: none;
+  background-color: #61dafb;
+  color: white;
+  border-radius: 4px;
+  padding: 4px 8px;
+  margin-left: '1em';
+  margin-right: '1em';
+  cursor: pointer;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+button:hover {
+  background-color: #4da7db;
+}
+
+table {
+  margin-top: 16px;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
 }
 
 .App-header {
@@ -50,18 +53,5 @@ th {
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color:whitesmoke;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  color: whitesmoke;
 }

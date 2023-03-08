@@ -1,69 +1,96 @@
 //IMPORTOIDAAN JÄRJESTELMÄ OLIO
+import { AgGridReact } from 'ag-grid-react';
+import 'ag-grid-community/styles/ag-grid.css';
+import 'ag-grid-community/styles/ag-theme-material.css';
 import React, { useState } from "react";
+import { render } from 'react-dom';
 import '../App.css';
 
-// JOKAISESSA TIEDOSTOSSA SAA JA PITÄÄ OLLA YKSI EXPORT DEFAULT
-export default function Todolist() {
-  // STATE YKSITTÄISEN TODO-ITEMIN SISÄLLÖKSI
-  // STATE VAIHTOEHDOT ON '', 0 tai []
-  const [todo, setTodo] = useState("");
+function Todolist() {
+  const [todo, setTodo] = useState({ description: "", date: "", priority: ""});
   const [todos, setTodos] = useState([]);
-  const [date, setDate] = useState("");
+  const gridRef = React.useRef();
+  const columns = [
+    { field: "description", 
+      sortable: true,
+      filter: true,
+      floatingFilter: true
+    },
+    { field: "date",
+      sortable: true,
+      filter: true,
+      floatingFilter: true },
+    { field: "priority", 
+      sortable: true,
+      filter: true,
+      floatingFilter: true,
+      cellStyle: (params) =>
+        params.value === "High" ? { color: "red" } : { color: "Black" }, 
+    },
+    ];
 
-  const addTodo = () => {
-    //console.log("ADD TODO");
-    // SPREAD NOTAATIOLLA PYSTYY LISÄÄMÄÄN TAULUKKOON YHDEN SOLUN
-    const newTodo = { date: date, description: todo };
-    setTodos([...todos, newTodo]);
-    setTodo("");
-    setDate("");
+  const inputChanged = (event) => {
+    setTodo({...todo, [event.target.name]: event.target.value});
   };
-  const deleteTodo = (index) => {
-    setTodos(todos.filter((todo, i) => i !== index));
+
+  const addTodo = (event) => {
+    setTodos([...todos, todo]);
+  };
+  const deleteTodo = () => {
+    if (gridRef.current.getSelectedNodes().length > 0){
+      setTodos(
+        todos.filter(
+          (todo, index) =>
+          index !== gridRef.current.getSelectedNodes()[0].childIndex
+        )
+      );
+    } else {
+      alert("Select row first");
+    }
   };
 
   return (
-    <div>
-        <h2>Add todo:</h2>
-        <div className="otsikko1">
-            Date:
-            <input placeholder="date"
-                value={date}
-                onChange={(event) => setDate(event.target.value)}>
+    <div className="container">
+        <h2>Todolist</h2>
 
+        <input
+          type="text"
+          onChange={inputChanged}
+          placeholder= "Description"
+          name="description"
+          value={todo.description}
+        />
+        <input
+          type="text"
+          onChange={inputChanged}
+          placeholder= "Date"
+          name="date"
+          value={todo.date}
+        />
+        <input
+          type="text"
+          onChange={inputChanged}
+          placeholder= "Priority"
+          name="priority"
+          value={todo.priority}
+        />
 
-            </input>
-        </div>
-        <div className="otsikko">
-            Description:
-            <input
-            placeholder="description"
-            value={todo}
-            onChange = {(event) => setTodo(event.target.value)}/>
-            
-            <button onClick={addTodo}>Add</button>
-        </div>
-        <table>
-            <thead>
-                <th>Date</th>
-                <th>Description</th>
-                <th> </th>
+        <button onClick={addTodo}>Add</button>
+        <button onClick={deleteTodo}>Delete</button>
 
-            </thead>
-         
-            <tbody>
-          {todos.map((todo, index) => (
-            <tr key={index}>
-              <td>{todo.date}</td>
-              <td>{todo.description}</td>
-              <td>
-                <button onClick={() => deleteTodo(index)}>Delete</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-        </table>
-    </div>
-
+        <div className="ag-theme-material"
+                style={{height: '700px', width: '700px', margin: 'auto'}} >
+                <AgGridReact
+                ref={gridRef}
+                animateRows={true}
+                onGridReady={(params) => (gridRef.current = params.api)}
+                rowSelection="single"
+                columnDefs={columns}
+                rowData={todos}>
+                </AgGridReact>
+                </div>
+              </div>
   );
 }
+
+export default Todolist;

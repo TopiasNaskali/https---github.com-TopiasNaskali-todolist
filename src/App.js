@@ -1,13 +1,14 @@
+import logo from './logo.svg';
+import React from "react";
 import './App.css';
-import Todotable from './components/Todolist';
-export default function App() {
-  return (
-    <div className='App'>
-        <header className='App-header'>Simple todolist</header>
-    
-    <div>
-      <Todotable />
-    </div>
-    </div>
-  );
+import TodoList from './components/TodoList';
+
+function App() {
+ return (
+  <div>
+      <TodoList />
+  </div> 
+ );
 }
+
+export default App
