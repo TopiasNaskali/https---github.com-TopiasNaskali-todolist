@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/https---github.com-TopiasNaskali-todolist/static/css/main.ac4c344f.css",
+    "main.js": "/https---github.com-TopiasNaskali-todolist/static/js/main.0a462095.js",
+    "static/js/787.97a945da.chunk.js": "/https---github.com-TopiasNaskali-todolist/static/js/787.97a945da.chunk.js",
+    "static/media/logo.svg": "/https---github.com-TopiasNaskali-todolist/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/https---github.com-TopiasNaskali-todolist/index.html",
+    "main.ac4c344f.css.map": "/https---github.com-TopiasNaskali-todolist/static/css/main.ac4c344f.css.map",
+    "main.0a462095.js.map": "/https---github.com-TopiasNaskali-todolist/static/js/main.0a462095.js.map",
+    "787.97a945da.chunk.js.map": "/https---github.com-TopiasNaskali-todolist/static/js/787.97a945da.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ac4c344f.css",
+    "static/js/main.0a462095.js"
+  ]
+}
